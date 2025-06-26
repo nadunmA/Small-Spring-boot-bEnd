@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.UserDto;
@@ -32,6 +33,11 @@ public class Usercontroller {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/user/{userId}")
+    public UserDto getUserById(@PathVariable Integer userId) {
+        return userService.getUserById(userId);
+    }
+
     @PostMapping("/addUser")
     public UserDto saveUser(@RequestBody UserDto userDto) {
         // TODO: process POST request
@@ -46,10 +52,10 @@ public class Usercontroller {
         return userService.updateUser(userDto);
     }
 
-    @DeleteMapping("/deleteUser")
-    public String deleteUser(@RequestBody UserDto userDto) {
+    @DeleteMapping("/deleteUser/{userId}")
+    public String deleteUser(@PathVariable Integer userId) {
         // TODO: process POST request
 
-        return userService.deleteUser(userDto);
+        return userService.deleteUser(userId);
     }
 }
